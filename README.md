@@ -1,6 +1,6 @@
 本站源码来自https://github.com/onevcat/OneV-s-Den
 
-请修改一下信息 :
+请修改_config.yml中以下信息 :
 
 ```
 
