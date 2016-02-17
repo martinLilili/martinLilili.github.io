@@ -1,63 +1,50 @@
-# Site settings
-title: 思想空间
-header-img: "img/facebook.jpg"
-tagline: "cn"  
-description: "李岳思想空间"  
-baseurl: ""
-url: "http://moonlspace.com"  
+# Basic
+title: 李岳
+subtitle: 思想空间
+welcome_message: 欢迎来到我的思想空间
+description: 我是李岳，iOS / Android 开发者。
+creator: <a href="http://moonlspace.com">@martinl</a>
 
-# About/contact
-owner: 
-  name: " martinl"
-  email: liyue5232@gmail.com
-  bio: "思想空间"
+url: "http://moonlspace.com"
 
-# Data
-gavatar: http://dreamofbook.qiniudn.com/Az..png
-favicon: img/favicon.png
+permalink: /:year/:month/:title/
 
-#douban_username:  cnfeat
-#twitter_username: feat
-#github_username: cnfeat
-#facebook_username: 
-#weibo_username: cnfeat 
-#zhihu_username: feat
+# Format
+highlighter: plain
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", tables]
 
-# Build settings  
-# use Github Flavored Markdown !important  
-# document: http://jekyllrb.com/docs/configuration/#kramdown  
-markdown: kramdown
-highlighter: rouge
-permalink: pretty
-paginate: 8
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+# supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
+cover_color: purple
 
-# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone: Asia/Shanghai
+blog_button:
+    title: 博客
+    description: 访问博客
 
-# Defaults for posts
-defaults:
-  -
-    scope: 
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
-      author: "martinl"
-      header-img: "img/facebook.jpg" # We don't want posts without a header image, that whould mean white on white
+nav:
+#    - {title: 项目, description: 我的项目, url: 'http://project.onevcat.com'}
+#    - {title: 关于, description: 了解更多关于我, url: 'http://about.onevcat.com/'}
+#    - {title: 订阅, description: 邮件订阅本站, url: 'http://eepurl.com/wNSkj'}
 
-# Comments 
-comments :
-  provider : duoshuo
-  duoshuo :
-    short_name : martinl
-  disqus :
-      short_name : martinl
+# Pagination
+gems: [jekyll-paginate]
+paginate: 10
+paginate_path: "page/:num/"
 
-# Analytics and webmaster tools stuff goes here
-google_analytics: 
-google_verify:
-# https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
-bing_verify:
+# Comment
+comment:
+    #disqus: onevcat
+    # duoshuo:
+# Social
+social:
+   # weibo: onevcat
+   # github: onevcat
+   # twitter: onevcat
+   # gplus: 107108267983477358170
+   # mail: onev@onevcat.com
 
-# Links to include in footer navigation
+# Google Analytics
+ga:
+    #id: UA-25719337-1
+    #host: onevcat.com
