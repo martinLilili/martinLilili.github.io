@@ -109,6 +109,8 @@ description: 整理一些链接
 
 [提供6种方法来判断App处于前台还是后台](https://github.com/wenmingvs/AndroidProcess)
 
+[Gradle脚本基础全攻略](http://blog.csdn.net/yanbober/article/details/49314255)
+
 
 ### 其他
 
