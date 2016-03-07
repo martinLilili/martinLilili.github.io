@@ -66,6 +66,16 @@ description: 整理一些链接
 
 [细说GCD（Grand Central Dispatch）如何用](http://www.jianshu.com/p/fbe6a654604c)
 
+[Objective-C 引用计数原理](http://yulingtianxia.com/blog/2015/12/06/The-Principle-of-Refenrence-Counting/)
+
+[iOS9AdaptationTips](https://github.com/ChenYilong/iOS9AdaptationTips)
+
+[开源项目:MMPopupView](http://adad184.com/2015/09/08/opensource-mmpopupview/)
+
+[详解CALayer 和 UIView的区别和联系](http://www.jianshu.com/p/079e5cf0f014)
+
+
+
 
 ### swift
 
@@ -80,6 +90,12 @@ description: 整理一些链接
 [Swift 最佳实践](https://github.com/KevinHM/ios-good-practices-the-lastest-version/blob/master/Swift-Best-Practices.md)
 
 [Swift类型之间转换](http://www.ruanman.net/swift/learn/4741.html)
+
+[Chatto is a Swift lightweight framework to build chat applications](https://github.com/badoo/Chatto)
+
+[When (not) to use guard](http://radex.io/swift/guard/)
+
+[Loggerithm](https://github.com/honghaoz/Loggerithm)
 
 
 ### mqtt
@@ -111,6 +127,42 @@ description: 整理一些链接
 
 [Gradle脚本基础全攻略](http://blog.csdn.net/yanbober/article/details/49314255)
 
+[Android应用启动优化:一种DelayLoad的实现和原理(上篇)](http://www.androidperformance.com/2015/11/18/Android-app-lunch-optimize-delay-load.html)
+
+[Instant Run 浅析](http://jiajixin.cn/2015/11/25/instant-run/)
+
+[Android动态加载黑科技 动态创建Activity模式](https://segmentfault.com/a/1190000004077469?utm_source=Weibo)
+
+[四步实现ChromeLikeSwipeLayout效果](http://www.jianshu.com/p/d6b4a9ad022e)
+
+[Android 开发中的日常积累](https://github.com/lizhangqu/CoreLink)
+
+[Android 沉浸式状态栏攻略 让你的状态栏变色吧](http://blog.csdn.net/lmj623565791/article/details/48649563)
+
+[Android Volley库源码简析（Image Request部分](https://segmentfault.com/a/1190000003767180?utm_source=Weibo&utm_medium=shareLink&utm_campaign=socialShare)
+
+[Android逆向分析必备网址大全](http://blog.csdn.net/androidsecurity/article/details/8815175)
+
+[Android 项目部署之Nexus私服搭建和应用](http://blog.csdn.net/l2show/article/details/48653949)
+
+[Android App 性能优化实践](http://mp.weixin.qq.com/s?__biz=MjM5NDAxNTY4MA==&mid=208525243&idx=1&sn=8afc00211b37af68f1995a3e8ad45111&scene=0%23rd)
+
+[droiReverse 反编译](https://github.com/Juude/droidReverse)
+
+[Android内存泄露案例分析](http://www.csdn.net/article/2015-09-07/2825631)
+
+[Android网络--我是怎么做的: Volley+OkHttp+Https](http://mdsa.51cto.com/art/201507/486433.htm)
+
+[Android 平滑图片加载和缓存库 Glide 使用详解](http://mp.weixin.qq.com/s?__biz=MjM5NDAxNTY4MA==&mid=208121065&idx=1&sn=79752137c46ac637a70e9176270ef20a&scene=0%23rd)
+
+[快速Android开发系列通信篇之EventBus](http://www.cnblogs.com/angeldevil/p/3715934.html)
+
+[深入讲解Android中Activity launchMode](http://droidyue.com/blog/2015/08/16/dive-into-android-activity-launchmode/)
+
+[Android异步任务处理框架AsyncTask源码分析](http://blog.csdn.net/feiduclear_up/article/details/46860015)
+
+[Android ListView工作原理完全解析，带你从源码的角度彻底理解](http://blog.csdn.net/guolin_blog/article/details/44996879)
+
 
 ### 其他
 
@@ -125,3 +177,13 @@ description: 整理一些链接
 [函数式编程初探](http://www.ruanyifeng.com/blog/2012/04/functional_programming.html)
 
 [函数式编程扫盲篇](http://www.cnblogs.com/kym/archive/2011/03/07/1976519.html)
+
+[Code Review 最佳实践](http://blog.csdn.net/djl4104804/article/details/49493419)
+
+[ios app 实现热更新（无需发新版本实现app添加新功能](http://blog.csdn.net/j_akill/article/details/46849213)
+
+[读书雷达](http://insights.thoughtworkers.org/reading-radar-2016/)
+
+[移动端图片格式调研](http://www.cocoachina.com/cms/wap.php?action=article&id=14478)
+
+[Don't let your UIViewController think for itself](http://blog.ios-developers.io/dont-let-your-uiviewcontroller-think-for-itself/)
