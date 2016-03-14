@@ -74,7 +74,9 @@ description: 整理一些链接
 
 [详解CALayer 和 UIView的区别和联系](http://www.jianshu.com/p/079e5cf0f014)
 
+[iOS 高效添加圆角效果实战讲解](http://www.jianshu.com/p/f970872fdc22)
 
+[UIKit性能调优实战讲解](http://www.jianshu.com/p/619cf14640f3)
 
 
 ### swift
