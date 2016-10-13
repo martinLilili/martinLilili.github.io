@@ -78,6 +78,10 @@ description: 整理一些链接
 
 [UIKit性能调优实战讲解](http://www.jianshu.com/p/619cf14640f3)
 
+[JSPatch – 动态更新iOS APP](http://www.cocoachina.com/ios/20150708/12468.html)
+
+[Protocol Buffers for Obj-C and Apple Swift](http://protobuf.io/#objc)
+
 
 ### swift
 
@@ -165,6 +169,23 @@ description: 整理一些链接
 
 [Android ListView工作原理完全解析，带你从源码的角度彻底理解](http://blog.csdn.net/guolin_blog/article/details/44996879)
 
+[浅谈 Android 编程思想和架构](https://drakeet.me/mvp-and-thinking-in-android)
+
+[APK瘦身记，如何实现高达53%的压缩效果](http://jaq.alibaba.com/community/art/show?spm=a313e.7916642.24000001.22.iDleeI&articleid=219)
+
+[给 Android 开发者的 RxJava 详解](http://blog.csdn.net/meegomeego/article/details/49155989/)
+
+[Jenkins+Gradle实现android开发持续集成、打包](http://blog.csdn.net/xiongmc/article/details/26515577)
+
+[下一代Android打包工具：packer-ng-plugin](https://github.com/mcxiaoke/packer-ng-plugin)
+
+
+### ffmpeg
+
+[RecordVideoDemo 封装为lib](https://github.com/szitguy/RecordVideoDemo)
+
+[TouchToRecord 有详细的源码](https://github.com/sourab-sharma/TouchToRecord)
+
 
 ### 其他
 
@@ -189,3 +210,17 @@ description: 整理一些链接
 [移动端图片格式调研](http://www.cocoachina.com/cms/wap.php?action=article&id=14478)
 
 [Don't let your UIViewController think for itself](http://blog.ios-developers.io/dont-let-your-uiviewcontroller-think-for-itself/)
+
+[在MAC上查找和设置$JAVA_HOME](http://guibin.iteye.com/blog/1999238)
+
+
+### tips
+
+* 报错：implicitly declaring library function ****
+
+	因为有一些函数太常用了如：printf，memset等，在编译器不是很严格的情况下，不用包含头文件，编译器会为这个方法隐式生成一个声明，一般只是报一个警告，但有些编译器如iOS9.3后会非常严格，导致报错，只需要添加头文件即可
+	
+	
+* android，一个很复杂的activity中下面有一个editview，点击弹起键盘editview没有跟着弹起，在activity的layout中最外层添加  android:fitsSystemWindows="true" 即可
+
+* 未能找到使用指定主机名的服务器 dns解析问题，可以试下https://www.dnspod.cn/httpdns
