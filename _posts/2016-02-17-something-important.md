@@ -213,6 +213,7 @@ description: 整理一些链接
 
 [在MAC上查找和设置$JAVA_HOME](http://guibin.iteye.com/blog/1999238)
 
+[xcode插件管理](http://alcatraz.io/)
 
 ### tips
 
