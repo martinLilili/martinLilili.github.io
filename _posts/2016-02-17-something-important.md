@@ -82,6 +82,9 @@ description: 整理一些链接
 
 [Protocol Buffers for Obj-C and Apple Swift](http://protobuf.io/#objc)
 
+[iOS开发 Xcode8中遇到的问题及改动](http://www.jianshu.com/p/90d5323cf510)
+
+[Xcode8调试黑科技：Memory Graph实战解决闭包引用循环问题](http://www.jianshu.com/p/f792f9aa2e45)
 
 ### swift
 

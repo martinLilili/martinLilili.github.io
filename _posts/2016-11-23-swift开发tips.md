@@ -71,7 +71,42 @@ description: swift开发tips
     
     
     
-###添加注释快捷键
+###xcode8添加注释快捷键
 
 ![zhushi](http://oh36yj5vw.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-11-23%20%E4%B8%8B%E5%8D%885.16.37.png)
        
+
+###循环引用的解决办法和区别
+
+#### 方法1: OC 的方法
+注意weak 的变量在运行时有可能被设置为 nil，weak不能使用 let
+
+    //weakSelf -> ViewController? 
+    //self - ViewController
+    //'weak' must be a mutable variable, because it may change at runtime
+    //weak 的变量在运行时有可能被设置为 nil，weak不能使用 let
+    
+    weak var weakSelf = self
+    loadData { (result) -> () in
+        print(result)
+        print(weakSelf)
+    }       
+    
+#### 方法2: Swift 的方法[weak self] － 首选
+    // [weak self] 表示 闭包中的 self 都是弱引用的，不需要再使用其他的变量
+    // weak 的变量在运行时有可能被设置为 nil，所以闭包中的 self，都是可选的
+    loadData { [weak self] (result) -> () in
+         // unexpectedly found nil while unwrapping an Optional value
+         // ! 强行解包，值不存在抛出异常
+         // ? 可选解包，值不存在，给nil发送消息
+         print(self?.view)
+     }
+        
+#### 方法3: [unowned self]
+    // [unowned self] 和 OC 中的 assign 是一样的，对象释放之后，指针保持不变
+    // 1> 闭包中不需要考虑解包的问题
+    // 2> 但是如果 self 释放，会出现野指针访
+    loadData { [unowned self] (result) -> () in
+        // EXC_BREAKPOINT 野指针访问
+        print(self.view)
+     }
