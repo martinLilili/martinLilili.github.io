@@ -86,6 +86,8 @@ description: 整理一些链接
 
 [Xcode8调试黑科技：Memory Graph实战解决闭包引用循环问题](http://www.jianshu.com/p/f792f9aa2e45)
 
+[Core Data并发调试](http://www.cocoachina.com/ios/20140625/8946.html)
+
 ### swift
 
 [Using Swift with Cocoa and Objective-C](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/index.html#//apple_ref/doc/uid/TP40014216-CH2-ID0)
