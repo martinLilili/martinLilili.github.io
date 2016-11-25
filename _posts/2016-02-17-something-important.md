@@ -88,6 +88,10 @@ description: 整理一些链接
 
 [Core Data并发调试](http://www.cocoachina.com/ios/20140625/8946.html)
 
+[针对苹果iOS最新审核要求为应用兼容IPv6](http://www.jianshu.com/p/54b989098537)
+
+[iOS应用支持IPV6，就那点事儿](http://blog.csdn.net/sunnyboy9/article/details/51503052)
+
 ### swift
 
 [Using Swift with Cocoa and Objective-C](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/index.html#//apple_ref/doc/uid/TP40014216-CH2-ID0)
