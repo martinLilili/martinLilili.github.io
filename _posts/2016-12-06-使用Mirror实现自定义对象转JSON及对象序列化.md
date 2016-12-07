@@ -28,7 +28,7 @@ description: 使用Mirror实现自定义对象转JSON及对象序列化
          var accountID : Int = 0 //学号
      }
 
-     class SchoolStudent: JSONModel {
+     class SchoolStudent: Student {
          var schoolName : String? //学校名
          var schoolmates : [Student]? //校友
          var principal : User? //校长
@@ -39,6 +39,9 @@ description: 使用Mirror实现自定义对象转JSON及对象序列化
      //创建一个schoolstudent实例对象
         let schoolstudent = SchoolStudent()
         schoolstudent.schoolName = "清华大学"
+        schoolstudent.accountID = 1024
+        schoolstudent.name = "martin"
+        schoolstudent.age = 20
         
         let principal = User()
         principal.name = "校长"
@@ -68,53 +71,9 @@ description: 使用Mirror实现自定义对象转JSON及对象序列化
 输出结果：
 
      school student = {
-       "principal" : {
-         "name" : "adsdasd",
-          "age" : 200,
-         "emails" : [
-           "hangge@hangge.com",
-           "system@hangge.com"
-         ]
-       },
-       "schoolName" : "beijing",
-       "schoolmates" : [
-         {
-           "name" : "hangge",
-           "age" : 100,
-           "accountID" : 2009,
-           "emails" : [
-             "hangge@hangge.com",
-             "system@hangge.com"
-           ]
-         },
-         {
-           "name" : "aaaaaa",
-           "age" : 50,
-           "accountID" : 2008,
-           "emails" : [
-             "asdgge@hangge.com",
-             "dsdsdm@hangge.com"
-           ]
-          }
-        ]
-     }
-     
-测试对象序列化：     
-        
-        let a = NSKeyedArchiver.archivedData(withRootObject: schoolstudent)
-        let b = NSKeyedUnarchiver.unarchiveObject(with: a)
-        print("unarchiveObject = \(b)")
-输出结果：
-     
-     unarchiveObject = Optional({
-       "principal" : {
-         "name" : "校长",
-         "age" : 60,
-         "emails" : [
-           "zhang@hangge.com",
-           "xiao@hangge.com"
-         ]
-       },
+       "name" : "martin",
+       "age" : 20,
+       "accountID" : 1024,
        "schoolName" : "清华大学",
        "schoolmates" : [
          {
@@ -135,9 +94,58 @@ description: 使用Mirror实现自定义对象转JSON及对象序列化
              "james2@hangge.com"
            ]
          }
-       ]
-     })
+       ],
+       "principal" : {
+         "name" : "校长",
+         "age" : 60,
+         "emails" : [
+           "zhang@hangge.com",
+           "xiao@hangge.com"
+         ]
+       }
+     }
+     
+测试对象序列化：     
         
+        let a = NSKeyedArchiver.archivedData(withRootObject: schoolstudent)
+        let b = NSKeyedUnarchiver.unarchiveObject(with: a)
+        print("unarchiveObject = \(b)")
+输出结果：
+     
+     unarchiveObject = Optional({
+       "name" : "martin",
+       "age" : 20,
+       "accountID" : 1024,
+       "schoolName" : "清华大学",
+       "schoolmates" : [
+         {
+           "name" : "martin",
+           "age" : 25,
+           "accountID" : 2009,
+           "emails" : [
+             "martin1@hangge.com",
+             "martin2@hangge.com"
+           ]
+          },
+         {
+           "name" : "james",
+           "age" : 26,
+           "accountID" : 2008,
+           "emails" : [
+             "james1@hangge.com",
+             "james2@hangge.com"
+           ]
+         }
+       ],
+       "principal" : {
+         "name" : "校长",
+         "age" : 60,
+         "emails" : [
+           "zhang@hangge.com",
+           "xiao@hangge.com"
+         ]
+       }
+     })        
         
 ## 完整项目代码:[JSONModelWithMirror](https://github.com/martinLilili/JSONModelWithMirror/tree/master)    
 
