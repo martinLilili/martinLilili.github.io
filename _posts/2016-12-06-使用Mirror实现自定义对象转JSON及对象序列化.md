@@ -473,7 +473,7 @@ description: 使用Mirror实现自定义对象转JSON及对象序列化
      false
 对于用Mirror得到的value，就会产生这种问题，例如上面User对象中的
 
-var nickname:String?  //昵称，
+     var nickname:String?  //昵称，
 
 在初始化时没有赋值，在使用Mirror遍历到这个属性时返回的就是这么一种Any类型的数据，我们没办法直接通过value == nil来判断它是不是可选值，直接使用也是不被KVC接受的数据类型，所以需要将其转换为确定的可选类型，通过mirror.displayStyle来判断其确定的类型来做相应的处理。
 
@@ -499,7 +499,7 @@ var nickname:String?  //昵称，
     
 ##### 实现 public required init?(coder aDecoder: NSCoder) 方法
      
-先实现方法获取所有的属性，包括父类的属性，并存储与数组中    
+先实现方法获取所有的属性，包括父类的属性，并存储于数组中    
  
      func getPropertiesWithMirror(mir : Mirror) -> [String] {
         var result: [String] = []
@@ -513,18 +513,18 @@ var nickname:String?  //昵称，
     }
     
     //便利所有的属性列表，将所有的属性存储到数组中
-    func codableProperties() -> [String] {
-        var codableProperties = [String]()
+    func allProperties() -> [String] {
+        var allProperties = [String]()
         let mirror = Mirror(reflecting: self)
-        codableProperties = getPropertiesWithMirror(mir: mirror)
-        return codableProperties
+        allProperties = getPropertiesWithMirror(mir: mirror)
+        return allProperties
     }    
 
 再实现 public required init?(coder aDecoder: NSCoder) 方法
  
     public required init?(coder aDecoder: NSCoder) {
         super.init()     //先初始化
-        let arr = codableProperties()  //得到所有的属性列表
+        let arr = allProperties()  //得到所有的属性列表
         for key in arr {
             let object = aDecoder.decodeObject(forKey: key)
             self.setValue(object, forKey: key)
@@ -609,6 +609,101 @@ KVO cannot function with pure Swift optionals because pure Swift optionals are n
 不管理解不理解，这里我们规定对象中不能出现基础类型的可选值即可。
 
 ### 总结：使用此JSONModel，如果只是实现对象转JSON，对于属性没有限制，如果想要实现对象序列化，需要确保对象中没有纯swift的类型数据，如Int？结构等等。
+
+## 做些优化
+
+观察上述代码，我们发现其中：getResultFromMirror方法，getPropertieValuesWithMirror方法，getPropertiesWithMirror方法实现非常接近，都是传入一个mirror对象，遍历所有的属性和值，对他们做些相应的处理，于是我们将这个方法抽象出来:
+
+首先声明一个协议，定义一个方法，传入一个mirror对象，和一个action闭包，每个调用这个方法时都可以根据自己的需求在action中处理每个属性和值：
+
+    //MARK: - MirrorResult，使用mirror遍历所有的属性和值，通过action传出做相应的处理
+    protocol MirrorResult {
+    
+    /// 使用mirror遍历所有的属性和值
+    ///
+    /// - Parameters:
+    ///   - mir: mirror
+    ///   - action: 要对属性和值做什么处理
+    func getResultFromMirror(mir : Mirror, action: (_ label: String?, _ value : Any) -> Void)
+    }
+
+实现这个协议：
+
+    extension MirrorResult {
+    
+	    func getResultFromMirror(mir : Mirror, action: (_ label: String?, _ value : Any) -> Void) {
+	        if let superMirror = mir.superclassMirror { //遍历父类所有属性
+	            getResultFromMirror(mir: superMirror, action: action)
+	        }
+	        if (mir.children.count) > 0  {
+	            for case let (label?, value) in (mir.children) {
+	                action(label, value)
+	            }
+	        }
+	    }
+    }   
+     
+让JSON实现MirrorResult：
+ 
+    protocol JSON: MirrorResult {
+        ...
+    }
+
+注释掉JSON原来的getResultFromMirror方法，修改toJSONModel方法，调用MirrorResult协议实现的方法：
+
+    func toJSONModel() -> AnyObject? {
+        let mirror = Mirror(reflecting: self)
+        if mirror.children.count > 0  {
+	//            let result = getResultFromMirror(mir: mirror)
+	            var result: [String:AnyObject] = [:]
+	            getResultFromMirror(mir: mirror, action: { (label, value) in
+	                //属性：label   值：value
+	                if let jsonValue = value as? JSON , label != nil { //如果value实现了JSON，继续向下解析
+	                    result[label!] = jsonValue.toJSONModel()
+	                }
+	            })
+	            return result as AnyObject?  //有属性的对象，返回result是一个dic
+	        }
+	        return self as AnyObject?  //基础数据类型，返回自己
+	    }
+	    
+让PropertieValues实现MirrorResult：	
+    
+	    protocol PropertieValues: MirrorResult {
+	        ...
+	    }
+
+注释掉PropertieValues的getPropertieValuesWithMirror方法，并修改codablePropertieValues方法如下：
+
+     func codablePropertieValues() -> [String:AnyObject] {
+        var codableProperties = [String:AnyObject]()
+        let mirror = Mirror(reflecting: self)
+	//        codableProperties = getPropertieValuesWithMirror(mir: mirror)
+	        getResultFromMirror(mir: mirror, action: { (label, value) in
+	            if label != nil {
+	                codableProperties[label!] = unwrap(any: value) as AnyObject?
+	            }
+	        })
+	        return codableProperties
+	  }
+	  
+注释掉PropertieValues的getPropertiesWithMirror方法，并修改allProperties方法如下：	
+
+    func allProperties() -> [String] {
+        var allProperties = [String]()
+        let mirror = Mirror(reflecting: self)
+	//        codableProperties = getPropertiesWithMirror(mir: mirror)
+	        getResultFromMirror(mir: mirror, action: { (label, value) in
+	            if label != nil {
+	                allProperties.append(label!)
+	            }
+	        })
+	        return allProperties
+	 }  
+	 
+测试通过	 
+	    
+	        
 
 ## 其他方案
 
