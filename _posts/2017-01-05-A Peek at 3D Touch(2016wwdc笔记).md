@@ -33,11 +33,11 @@ iOS9中提供了Home Screen Quick Actions 和 Peek and Pop 两种应用方法，
 ![3](http://oh36yj5vw.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-01-05%20%E4%B8%8B%E5%8D%885.33.26.png)
 
 1. UIApplicationShortcutItemIconType 表示快捷键的图标，这里只能使用系统提供的一系列图标，通过枚举 UIApplicationShortcutIconType 定义
-2. UIApplicationShortcutItemTitle 表示快捷键的标题，这里是支持序列化的，即你在InfoPlist.strings声明，如上图中的例子在InfoPlist.strings中声明
+2. UIApplicationShortcutItemTitle 表示快捷键的标题，这里是支持国际化的，即你可以在InfoPlist.strings中声明，如上图中的例子在InfoPlist.strings中声明
 
 		"SHORTCUT_TITLE_NEWCHAT" = "New Chat";
 		
-3. UIApplicationShortcutItemType 表示快捷键的唯一标识，用于在接受到快捷键点击事件时区分，其定义方式类似于Bundle id。
+3. UIApplicationShortcutItemType 表示快捷键的唯一标识，用于在接收到快捷键点击事件时区分，其定义方式类似于Bundle id。
 
 #### 动态快捷键
 动态快捷键即快捷键的图标标题等可能会有变化，如本文Demo中的后3个快捷键，本文Demo是一款聊天软件，后三个快捷键是最常聊天的3个人的快捷聊天入口，所以需要根据具体情况变化。动态快捷键的实现方式如下：
@@ -70,7 +70,7 @@ iOS9中提供了Home Screen Quick Actions 和 Peek and Pop 两种应用方法，
 
 		public init(type: String, localizedTitle: String, localizedSubtitle: String?, icon: UIApplicationShortcutIcon?, userInfo: [AnyHashable : Any]? = nil)
 
-它要求传入title，subtitle，icon用于现实，还需要传入type，userInfo用于响应点击时间，进行我们想要的操作。
+它要求传入title，subtitle，icon用于显示，还需要传入type，userInfo用于响应点击时间，进行我们想要的操作。
 
 ### 响应快捷键
 当用户点击了快捷键后，我们需要监听并做出相应的处理。
@@ -136,14 +136,14 @@ Peek and Pop分为两段式按压，即Peak（Preview）和Pop（Commit），分
         // 得到点击cell的index
         guard let indexPath = tableView.indexPathForRow(at: location) else { return nil }
         
-        // 初始化将要现实的viewcontroller
+        // 初始化将要显示的viewcontroller
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: ChatDetailViewController.identifier)
         guard let chatDetailViewController = viewController as? ChatDetailViewController else { return nil }
         chatDetailViewController.chatItem = chatItem(at: indexPath)
         chatDetailViewController.isReplyButtonHidden = true
         
-        //设置点击时现实的高亮区域，当按压cell时cell会有一个高亮的效果
+        //设置点击时显示的高亮区域，当按压cell时cell会有一个高亮的效果
         let cellRect = tableView.rectForRow(at: indexPath)
         previewingContext.sourceRect = previewingContext.sourceView.convert(cellRect, from: tableView)
 
@@ -165,7 +165,7 @@ Peek and Pop分为两段式按压，即Peak（Preview）和Pop（Commit），分
 当进入Preview状态时，向上滑动页面可以现实快捷键如：
 ![](http://oh36yj5vw.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-01-05%20%E4%B8%8B%E5%8D%886.47.04.png)
 
-它需要子viewcontroller冲下previewActionItems方法
+它需要子viewcontroller重写previewActionItems方法
 
 如：
 	override func previewActionItems() -> [UIPreviewActionItem] {       let heart = UIPreviewAction(title:"❤", style: .default) { (action, viewController) in let heart = UIPreviewAction(title: "        // 处理点击事件       }       return [heart]    }
@@ -241,7 +241,7 @@ UIPreviewInteraction和Peek and Pop很像，也是有两段按压回调Preview�
 	        return !replyViewControllerIsPresented
     }
     
-之后调用：
+之后连续调用：
 
     func previewInteraction(_ previewInteraction: UIPreviewInteraction, didUpdatePreviewTransition transitionProgress: CGFloat, ended: Bool) {
         var sourcePoint = previewInteraction.location(in: view) //得到当前按压的位置
@@ -251,7 +251,7 @@ UIPreviewInteraction和Peek and Pop很像，也是有两段按压回调Preview�
         }
     }    
 
-手指加力继续按压，调用：
+手指加力继续按压，连续调用：
 
     func previewInteraction(_ previewInteraction: UIPreviewInteraction, didUpdateCommitTransition transitionProgress: CGFloat, ended: Bool) {
         if ended {
@@ -273,7 +273,7 @@ UIPreviewInteraction和Peek and Pop很像，也是有两段按压回调Preview�
         //do cancel
     }
     
-完成如上代码即可实现自定义的UIPreviewInteraction功能，本文中例子实现效果如下：
+完成如上述代码即可实现自定义的UIPreviewInteraction功能，本文中例子实现效果如下：
 ![7](http://oh36yj5vw.bkt.clouddn.com/3dtouchgif3.gif)
 具体可参照Demo代码。
     
