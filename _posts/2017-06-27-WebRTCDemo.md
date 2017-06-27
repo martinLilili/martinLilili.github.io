@@ -275,7 +275,9 @@ description: WebRTCDemo
 
 在这里我们得到自己的ice candidate并发送给对方如上
 
-同样，当B获得了它的ice candidate信息后也会发送给A，处理逻辑如下：
+同样，当B获得了它的ice candidate信息后也会发送给A
+
+收到ice candidate消息的处理逻辑如下：
 
     func parseDic(msg : String)  {
         
@@ -410,6 +412,13 @@ setRemoteDescriptionWith会回调RTCSessionDescriptionDelegate的方法didSetSes
 
 
 如上就可以实现视频通信了。
+
+### 总结
+不论是发起端还是接收端，都需要做这么几件事：
+
+1. setLocalDescription（发起端通过createOffer触发，接收端通过createAnswer触发）
+2. setRemoteDescription（通过信令服务获得对方的sdp并设置RemoteDescription）
+3. connection?.add(candidate) （通过信令服务器交换双方的ice candidate）
 
 
 
