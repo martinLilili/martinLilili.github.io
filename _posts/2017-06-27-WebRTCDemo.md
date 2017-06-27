@@ -185,7 +185,8 @@ description: WebRTCDemo
             str += "|"
             tcpSocket?.write(str.data(using: .utf8)!, withTimeout: -1, tag: 0)
             
-注意：为了防止分包和连包问题，我们在数据结尾加了一个"|"
+            
+注意：为了防止分包和连包问题，我们在数据结尾加了一个|
 
 ##### 收到B回复的answer            	
 	
@@ -238,7 +239,7 @@ description: WebRTCDemo
 	
 我们在GCDAsyncSocket的didRead回调方法中处理接收到的数据.
 
-首先通过"|"分包，然后交给parseDic方法处理，主要看下parseDic里面的代码：当解析event为answer时，我们即收到了B的sdp，并调用setRemoteDescriptionWith设置B的sdp：
+首先通过|分包，然后交给parseDic方法处理，主要看下parseDic里面的代码：当解析event为answer时，我们即收到了B的sdp，并调用setRemoteDescriptionWith设置B的sdp：
 
 	let remoteSdp = RTCSessionDescription(type: "answer", sdp: dic["sdp"])
 	                connection?.setRemoteDescriptionWith(self, sessionDescription: remoteSdp)		
