@@ -93,7 +93,7 @@ WorkbenchViewController is a view controller that contains a Blockly workspace, 
     }		
 
 
-这是我们会得到一个空的工作台
+这时我们会得到一个空的工作台
 
 
 ## 设置toolbox工具条
@@ -115,7 +115,7 @@ WorkbenchViewController is a view controller that contains a Blockly workspace, 
 	  </category>
 	</xml>
 	
-这个xml文件定义了一个工作条，它上面有一个循环的代码块交Loops
+这个xml文件定义了一个工作条，它上面有一个循环的代码块叫Loops
 
 我们将这个xml文件加载进去：
 
@@ -321,7 +321,7 @@ previousStatement，nextStatement，colour等在[官方文档Define Blocks](http
 
 ## 保存/加载 workspace
 
-当我们使用如上的代码块编写一段逻辑后我们需要将其保存下来，以便转化为js代码的一运行
+当我们使用如上的代码块编写一段逻辑后我们需要将其保存下来，以便转化为js代码得以运行
 
 添加一个保存按钮，实现如下：
 
@@ -403,7 +403,7 @@ previousStatement，nextStatement，colour等在[官方文档Define Blocks](http
 	    //通过'DO'字段获其他代码块转化的js代码
 	    var func = Blockly.JavaScript.statementToCode(block,"DO");
 	    
-	    //将	title_input_block实现为其他代码块的代码 + ActionMaker.setText('title');
+	    //将	title_input_block实现为：其他代码块的代码 + ActionMaker.setText('title');
 	    return func + 'ActionMaker.setTitle(' + title + ');\n';
 	};
 	
@@ -461,7 +461,7 @@ previousStatement，nextStatement，colour等在[官方文档Define Blocks](http
 	    
 	}
 
-注意上面的blockly_web/blockly_compressed.js是系统默认自带的代码块的js实现，需要单独添加到项目中，在官方Demo中有blockly_web文件夹，将其添加到项目中，注意选择Create folder reference	.
+注意上面的blockly_web/blockly_compressed.js是系统默认自带的代码块的js实现，pod时并没有加到项目中，需要单独添加，在官方Demo中有blockly_web文件夹，将其添加到项目中，注意选择Create folder reference	.
 
 
 #### 实现代码
@@ -584,7 +584,7 @@ previousStatement，nextStatement，colour等在[官方文档Define Blocks](http
 	    }
 	}
 	
-如上我们声明了一系列方法，并做了简单打印实现，已确认其确实被调用
+如上我们声明了一系列方法，并做了简单打印实现，以确认其确实被调用
 
 ## 运行js代码
 
